@@ -12,7 +12,7 @@ WORKDIR "/src/."
 RUN dotnet build "deployment-app.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "deployment-app.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "deployment-app.csproj" --self-contained true -r linux-x64 -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
